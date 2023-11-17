@@ -7,10 +7,10 @@ const Header = () => {
         <Link href='/' className='text-2xl font-bold'>Blogs App</Link>
         <ul className='flex flex-row gap-5'>
             <li className='hover:underline'>
-                <Link href='/api/auth/signin'>Login</Link>
+                <Link href='/blogs'>Blogs</Link>
             </li>
             <li className='hover:underline'>
-                <Link href='/blogs'>Blogs</Link>
+                <Link href='/api/auth/signin'>Login</Link>
             </li>
         </ul>
     </header>
