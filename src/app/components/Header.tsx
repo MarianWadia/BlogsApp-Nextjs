@@ -1,7 +1,12 @@
+import { getCurrentUser } from '@/libs/getCurrentUser'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
+import ButtonSignout from './ButtonSignout'
 
-const Header = () => {
+const Header = async () => {
+  const user = await getCurrentUser()
+
   return (
     <header className='bg-blue-800 mx-auto flex justify-around py-4'>
         <Link href='/' className='text-2xl font-bold'>Blogs App</Link>
@@ -9,9 +14,13 @@ const Header = () => {
             <li className='hover:underline'>
                 <Link href='/blogs'>Blogs</Link>
             </li>
-            <li className='hover:underline'>
+          {user?.email ? ( 
+            <ButtonSignout />
+            ) : (
+              <li className='hover:underline'>
                 <Link href='/api/auth/signin'>Login</Link>
-            </li>
+              </li>
+            )}
         </ul>
     </header>
   )

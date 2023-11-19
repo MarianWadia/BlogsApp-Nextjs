@@ -5,6 +5,8 @@ import React from 'react'
 import Comments from "@/app/components/Comments"
 import FormComment from '@/app/components/FormComment'
 
+
+
 const BlogDetails = () => {
     const {id} = useParams()
     const filteredBlog = blogs.filter((blog) => blog.id === Number(id))

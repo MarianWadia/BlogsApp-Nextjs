@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import NewPostForm from "./components/NewPostForm";
 
 export default function Home() {
