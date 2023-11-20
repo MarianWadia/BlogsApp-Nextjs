@@ -1,4 +1,6 @@
 "use client"
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 
 type Author ={
@@ -17,7 +19,7 @@ type Author ={
     published: boolean;
     authorId: string;
     author: Author;
-  } | null
+  } | null | undefined;
   
   interface MyComponentProps {
     singleBlog: BlogType | null;
@@ -25,6 +27,7 @@ type Author ={
 
 const FormComment: React.FC<MyComponentProps> = ({singleBlog}) => {
     const [comment, setComment] = useState<string>("")
+    const { data } = useSession()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>)=>{
         e.preventDefault();
@@ -32,9 +35,15 @@ const FormComment: React.FC<MyComponentProps> = ({singleBlog}) => {
         name ==='comment' && setComment(value)
     }
 
-    const handleSubmit = ()=>{
-        console.log(comment);
-        
+    const handleSubmit = async () => {
+      const response = await axios.post('/api/comment', {
+          text: comment,
+          postId: singleBlog?.id,
+          userId: singleBlog?.authorId
+        })
+        const data = await response.data;
+        console.log(data);
+        setComment('')
     }
   return (
     <div>
@@ -47,9 +56,9 @@ const FormComment: React.FC<MyComponentProps> = ({singleBlog}) => {
                     value={comment}
                     onChange={handleChange}
                 />
-                <button onClick={handleSubmit} 
+                <button onClick={handleSubmit} disabled={data?.user?.email? false : true}
                         className='bg-green-500 md:px-2 rounded-md text-sm md:text-md font-semibold text-cyan-50 w-2/6 md:w-1/6
-                         hover:bg-green-900 transition-all'
+                         hover:bg-green-900 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed'
                 >
                     submit
                 </button>

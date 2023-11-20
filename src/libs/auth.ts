@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
-import prisma from "./db";
+import {prisma} from "./db";
 
 
 // console.log(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET)

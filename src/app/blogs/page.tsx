@@ -1,16 +1,22 @@
 import React from 'react'
 import Link from 'next/link'
-import prisma from '@/libs/db'
+import {prisma, disconnect} from '@/libs/db'
 
-const Blogs = async () => {
-    const posts = await prisma.post.findMany({
+
+const getPosts = async () => {
+    const blogs = await prisma.post.findMany({
         include:{
             author: true
         }
     })
+    await disconnect()
+    return blogs
+}
+const Blogs = async () => {
+    const posts = await getPosts()
   return (
-    <div className='max-w-4xl mx-auto bg-blue-100 my-8 rounded-lg'>
-        <h1 className='font-bold text-3xl text-white p-4'>Blogs</h1>
+    <div className='max-w-4xl mx-auto bg-gray-400 my-8 rounded-lg'>
+        <h1 className='font-bold text-3xl text-gray-700 p-4 text-center'>The Blogs</h1>
 
         <div className='grid grid-col-1 md:grid-cols-3 gap-4 p-4 '>
             {posts.map((post:any)=>(

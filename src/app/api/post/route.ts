@@ -1,4 +1,4 @@
-import prisma from "@/libs/db";
+import {prisma, disconnect} from "@/libs/db";
 import { getCurrentUser } from "@/libs/getCurrentUser";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -26,5 +26,7 @@ export async function POST(req:Request){
         return NextResponse.json({message:"Post created successfully", userData, createdPost}, {status: 200})
    } catch (error) {
         NextResponse.json({message: "Error creating post"}, {status: 500})
+   }finally{
+        await disconnect()
    }
 } 

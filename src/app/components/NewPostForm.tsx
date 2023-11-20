@@ -38,12 +38,17 @@ const NewPostForm = () => {
             }
         } catch (error) {
             console.error(error)
+        }finally{
+            setFormData({
+                title: "",
+                body: ""
+            })
         }
     }
     const {data} = useSession()
 
   return (
-    <form className='max-w-3xl mx-auto p-4 bg-gray-200 flex flex-col gap-4 rounded-md justify-center items-center' onSubmit={handleSubmit}>
+    <form className='max-w-3xl mx-auto p-4 bg-gray-400 flex flex-col gap-4 rounded-md justify-center items-center' onSubmit={handleSubmit}>
         <input type='text' placeholder='Enter Post Title Here' className={inputClass} name="title" 
              value={formData.title} onChange={handleChange}/>
         <ReactTextareaAutosize className={inputClass} placeholder='Enter Post body Here' name='body' 

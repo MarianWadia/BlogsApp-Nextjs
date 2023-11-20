@@ -8,7 +8,7 @@ const Header = async () => {
   const user = await getCurrentUser()
 
   return (
-    <header className='bg-blue-800 mx-auto flex justify-around py-4'>
+    <header className='bg-gray-400 mx-auto flex justify-around py-4'>
         <Link href='/' className='text-2xl font-bold'>Blogs App</Link>
         <ul className='flex flex-row gap-5'>
             <li className='hover:underline'>
