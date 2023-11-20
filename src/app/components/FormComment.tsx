@@ -1,17 +1,27 @@
 "use client"
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 
-interface BlogType {
-    id: number;
+type Author ={
+    id: string;
+    name: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    image: string | null;
+  } | null;
+  type BlogType = {
+    id: string;
     title: string;
     body: string;
-    username: string;
-}
-
-interface MyComponentProps {
-  singleBlog: BlogType;
-}
-
+    createdAt: Date;
+    updatedAt: Date;
+    published: boolean;
+    authorId: string;
+    author: Author;
+  } | null
+  
+  interface MyComponentProps {
+    singleBlog: BlogType | null;
+  }
 
 const FormComment: React.FC<MyComponentProps> = ({singleBlog}) => {
     const [comment, setComment] = useState<string>("")
